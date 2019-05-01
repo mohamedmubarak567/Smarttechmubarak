@@ -28,7 +28,7 @@ namespace mubaraktask.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace mubaraktask.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product, HttpPostedFileBase ProductPhoto)
+        public ActionResult Create(Products product, HttpPostedFileBase ProductPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +62,7 @@ namespace mubaraktask.Controllers
                     product.Photo = path1;
 
                 }
+                product.LastUpdated = DateTime.Now;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -77,7 +78,7 @@ namespace mubaraktask.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -90,7 +91,7 @@ namespace mubaraktask.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product,HttpPostedFileBase ProductPhoto)
+        public ActionResult Edit(Products product,HttpPostedFileBase ProductPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +106,7 @@ namespace mubaraktask.Controllers
                     product.Photo = path1;
 
                 }
+                product.LastUpdated = DateTime.Now;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,7 +121,7 @@ namespace mubaraktask.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -132,7 +134,7 @@ namespace mubaraktask.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

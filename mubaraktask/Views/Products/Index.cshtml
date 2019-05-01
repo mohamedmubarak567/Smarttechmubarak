@@ -1,4 +1,4 @@
-﻿@model IEnumerable<mubaraktask.Models.Product>
+﻿@model IEnumerable<mubaraktask.Models.Products>
 
 @{
     ViewBag.Title = "Index";
@@ -51,7 +51,7 @@
                         <img src="~/@item.Photo" class="thumbnail" style="width:100px;" />
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Price)
+                        @item.Price EGP
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LastUpdated)
